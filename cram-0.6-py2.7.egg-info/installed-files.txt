@@ -1,0 +1,8 @@
+../cram.py
+../cram.pyc
+./
+SOURCES.txt
+dependency_links.txt
+top_level.txt
+PKG-INFO
+../../../bin/cram
