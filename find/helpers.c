@@ -48,23 +48,24 @@ bool search(int value, int values[], int n)
   bool found = false;
   while (!found)
   {
-    if (n <= 0)
+    if (i <= 0)
     {
       return false;
     }
-    else if (n > size)
+    else if (i > size)
     {
       return false;
     }
-    else if (value < values[n/i])
+    else if (value < values[i])
     {
       i = smaller(i);
     }
-    else if (value > values[n/i])
+    else if (value > values[i])
     {
+      printf("bigger: %d\n", i);
       i = bigger(i);
     }
-    else if (value == values[n/i])
+    else if (value == values[i])
     {
       return true;
     }
