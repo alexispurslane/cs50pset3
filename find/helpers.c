@@ -43,29 +43,19 @@ void printai(int values[], int n)
 
 bool search(int value, int values[], int n)
 {
-  int size = n;
-  int i = 2; 
-  bool found = false;
-  while (!found)
+  int low = 0;
+  while (low < n)
   {
-    if (i <= 0)
+    int mid = values[(low + n) / 2];
+    if (mid < value)
     {
-      return false;
+      low = mid+1;
     }
-    else if (i > size)
+    else if (mid > value)
     {
-      return false;
+      n = mid;
     }
-    else if (value < values[i])
-    {
-      i = smaller(i);
-    }
-    else if (value > values[i])
-    {
-      printf("bigger: %d\n", i);
-      i = bigger(i);
-    }
-    else if (value == values[i])
+    else if (mid == value)
     {
       return true;
     }
