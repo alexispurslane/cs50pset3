@@ -30,32 +30,24 @@ int smaller(int n)
 
 void printai(int values[], int n)
 {
-  printf("{");
-  for (int i = 0; i < n; i++)
-  {
-    printf("%d", values[i]);
-    if (i+1 != n) {
-      printf(", ");
-    }
-  }
-  puts("}");
 }
 
 bool search(int value, int values[], int n)
 {
   int low = 0;
-  while (low < n)
+    while (low < n)
   {
-    int mid = values[(low + n) / 2];
-    if (mid < value)
+    int mid = (low + n) / 2;
+    int midval = values[mid];
+    if (midval < value)
     {
-      low = mid+1;
+      low = mid + 1;
     }
-    else if (mid > value)
+    else if (midval > value)
     {
       n = mid;
     }
-    else if (mid == value)
+    else
     {
       return true;
     }
@@ -69,26 +61,20 @@ bool search(int value, int values[], int n)
 void sort(int values[], int n)
 {
   bool swapped = false;
-  int gap = n;
-  float shrink = 1.3;
   do
   {
-    gap = (int)(gap / shrink);
-    if (gap < 1)
-    {
-      gap = 1;
-    }
     swapped = false;
-    for (int i = 0; i + gap < n; i++)
+    for (int i = 0; i+1 < n; i++)
     {
-      if (values[i] > values[i+gap])
+      if (values[i] > values[i+1])
       {
-        swapped = true;
         int tmp = values[i];
-        values[i] = values[i+gap];
-        values[i+gap] = tmp;
+        values[i] = values[i+1];
+        values[i+1] = tmp;
+        swapped = true;
       }
     }
-  } while (swapped && gap != 1);
+    printai(values, n);
+  } while (swapped);
   return;
 }
