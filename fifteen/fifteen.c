@@ -30,7 +30,8 @@
 
 // board, whereby board[i][j] represents row i and column j
 int board[MAX][MAX];
-
+int secboard[MAX];
+int curnumber = 0;
 // board's dimension
 int d;
 
@@ -57,6 +58,7 @@ int main(int argc, string argv[])
 
     // ensure valid dimensions
     d = atoi(argv[1]);
+    curnumber = (d*d)-1;
     if (d < MIN || d > MAX)
     {
         printf("Board must be between %i x %i and %i x %i, inclusive.\n",
@@ -131,7 +133,18 @@ void greet(void)
  */
 void init(void)
 {
-    // TODO
+  for (int i = 0; i < d; i++)
+  {
+    for (int j = 0; j < d; j++)
+    {
+      if (curnumber > 0)
+      {
+        board[i][j] = curnumber--;
+      } else {
+        board[i][j] = -1;
+      }
+    }
+  }
 }
 
 /**
@@ -139,17 +152,110 @@ void init(void)
  */
 void draw(void)
 {
-    // TODO
+  printf("\n");
+  for (int i = 0; i < d; i++)
+  {
+    for (int j = 0; j < d; j++)
+    {
+      if (j == 0)
+      {
+        printf("   ");
+      }
+      if (board[i][j] == -1)
+      {
+        printf("_  ");
+      }
+      else
+      {
+        if (board[i][j] >= 10) {
+          printf("%d ", board[i][j]);
+        }
+        else
+        {
+          printf("%d  ", board[i][j]);
+        }
+      }
+      if (j == d-1) 
+      {
+        printf("\n\n");
+      }
+    }
+  }
+  printf("\n");
 }
 
 /**
  * If tile borders empty space, moves tile and returns true, else
  * returns false. 
  */
+int find(int value, int values[], int n)
+{
+  int low = 0;
+  while (low < n)
+  {
+    int mid = (low + n) / 2;
+    int midval = values[mid];
+    printf("%d\n", midval);
+    if (midval != -1)
+    {
+      if (midval > value)
+      {
+        low = mid - 1;
+      }
+      else if (midval < value)
+      {
+        n = mid;
+      }
+      else
+      {
+        return mid;
+      }
+    }
+    else
+    {
+      int mid = (low-1 + n) / 2;
+      int midval = values[mid];
+      if (midval > value)
+      {
+        low = mid - 1;
+      }
+      else if (midval < value)
+      {
+        n = mid;
+      }
+      else
+      {
+        return mid;
+      }
+    }
+  }
+
+  return -1;
+}
+
 bool move(int tile)
 {
-    // TODO
+  int col = -1;
+  int row = -1;
+  for (int i = 0; i < d; i++)
+  {
+    row = find(tile, board[i], d);
+    if (row > -1)
+    {
+      col = i;
+    }
+  }
+  if (col == -1 || row == -1)
+  {
     return false;
+  }
+  if (board[col][row+1] == -1)
+  {
+    board[col][row+1] = tile;
+    board[col][row] = -1;
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -158,8 +264,7 @@ bool move(int tile)
  */
 bool won(void)
 {
-    // TODO
-    return false;
+  return false;
 }
 
 /**

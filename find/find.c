@@ -52,10 +52,8 @@ int main(int argc, string argv[])
     printf("\n");
 
     // sort the haystack
-    printf("one: ");
     printai(haystack, size);
     sort(haystack, size);
-    printf("two: ");
     printai(haystack, size);
 
     // try to find needle in haystack
