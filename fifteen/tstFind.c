@@ -1,6 +1,5 @@
 #include <cs50.h>
 #include <stdio.h>
-#include "helpers.h"
 #define true 1
 #define false 0
 
@@ -15,7 +14,7 @@ int findrev(int value, int values[], int n)
     {
       if (midval > value)
       {
-        low = mid - 1;
+        low = mid + 1;
       }
       else if (midval < value)
       {
@@ -42,14 +41,13 @@ int findrev(int value, int values[], int n)
       {
         return mid;
       }
-
     }
   }
   return -1;
 }
 
 int main (int argc, string argv[]) {
-  int a[9] = {8, 7, 6, 5, 4, 3, 2, -1, 1};
+  int a[9] = {8, 7, 6};
   printf("%d\n", findrev(2, a, sizeof(a)));
   return 0;
 }

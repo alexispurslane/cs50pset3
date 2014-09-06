@@ -195,12 +195,11 @@ int find(int value, int values[], int n)
   {
     int mid = (low + n) / 2;
     int midval = values[mid];
-    printf("%d\n", midval);
     if (midval != -1)
     {
       if (midval > value)
       {
-        low = mid - 1;
+        low = mid + 1;
       }
       else if (midval < value)
       {
@@ -229,10 +228,8 @@ int find(int value, int values[], int n)
       }
     }
   }
-
   return -1;
 }
-
 bool move(int tile)
 {
   int col = -1;
@@ -252,7 +249,6 @@ bool move(int tile)
   if (board[col][row+1] == -1)
   {
     board[col][row+1] = tile;
-    board[col][row] = -1;
     return true;
   }
   return false;
